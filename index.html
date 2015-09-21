@@ -7,41 +7,83 @@
     <script src="lib/angular.js"></script>
     <script src="app.js"></script>
     <script src="js/OnlineStoreController.js"></script>
+    <script src="js/CustomersController.js"></script>
   </head>
   <body>
     <h1>Lambazon</h1>
-    <div class="container" ng-controller="ProductsCtrl">
+    <div class="container"
+      <div class="products" ng-controller="ProductsCtrl">
+        <div class="row">
+          <div class="col-md-6">
+            <h3 ng-show="products.length">Products</h3>
+            <ul>
+              <li ng-repeat="item in products">
+                {{ item.name }}
+                <ul>
+                  <li>Description:{{ item.description }}</li>
+                  <li>${{ item.price }}</li>
+                  <li>Quantity: {{ item.quantity }}</li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-md-12">
-          <h3 ng-show="products.length">Products</h3>
+        <div class="col-md-4">
+          <h3>Add a product</h3>
+          <form ng-submit="addProduct()" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="productName" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="productDescription" class="form-control" placeholder="Product Description">
+            </div>
+            <div class="form-group">
+              <input type="number" min="0.01" step="0.01" ng-model="productPrice" class="form-control" placeholder="Price">
+            </div>
+            <div class="form-group">
+              <input type="number" ng-model="productQuantity" class="form-control" placeholder="Quantity">
+            </div>
+            <button type="submit" class="btn btn-danger">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="customers" ng-controller="CustomersCtrl">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 ng-show="customers.length">Customers</h3>
           <ul>
-            <li ng-repeat="item in products">
-              {{ item.name }}
+            <li ng-repeat="customer in customers">
+              {{ customer.name }}
               <ul>
-                <li>Description:{{ item.description }}</li>
-                <li>${{ item.price }}</li>
-                <li>Quantity: {{ item.quantity }}</li>
+                <li>Address:{{ customer.address }}</li>
+                <li>Zip: {{ customer.zip }}</li>
               </ul>
             </li>
           </ul>
+        </div>
+        <div class="col-md-4">
+          <h3>New Customer:</h3>
+          <form ng-submit="addCustomer()" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="customerName" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="customerAddress" class="form-control" placeholder="Address">
+            </div>
+            <div class="form-group">
+              <input type="number" ng-model="customerZip" class="form-control" placeholder="Zip Code">
+            </div>
+            <button type="submit" class="btn btn-danger">Add</button>
+          </form>
+        </div>
+
       </div>
-      <div class="col-md-4">
-        <h3>Add a product</h3>
-        <form ng-submit="addProduct()" role="form">
-          <div class="form-group">
-            <input type="text" ng-model="productName" class="form-control" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <input type="text" ng-model="productDescription" class="form-control" placeholder="Product Description">
-          </div>
-          <div class="form-group">
-            <input type="number" min="0.01" step="0.01" ng-model="productPrice" class="form-control" placeholder="Price">
-          </div>
-          <div class="form-group">
-            <input type="number" ng-model="productQuantity" class="form-control" placeholder="Quantity">
-          </div>
-          <button type="submit" class="btn btn-danger">Add</button>
-        </form>
     </div>
+  </div>
+</div>
+
   </body>
 </html>
