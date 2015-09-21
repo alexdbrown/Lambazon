@@ -10,12 +10,38 @@
   </head>
   <body>
     <h1>Lambazon</h1>
-    <div class="container" ng-controller="OnlineStoreCtrl">
-      <div class="col-md-12">
-        <h3>Products</h3>
-
-        
+    <div class="container" ng-controller="ProductsCtrl">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 ng-show="products.length">Products</h3>
+          <ul>
+            <li ng-repeat="item in products">
+              {{ item.name }}
+              <ul>
+                <li>Description:{{ item.description }}</li>
+                <li>${{ item.price }}</li>
+                <li>Quantity: {{ item.quantity }}</li>
+              </ul>
+            </li>
+          </ul>
       </div>
+      <div class="col-md-4">
+        <h3>Add a product</h3>
+        <form ng-submit="addProduct()" role="form">
+          <div class="form-group">
+            <input type="text" ng-model="productName" class="form-control" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input type="text" ng-model="productDescription" class="form-control" placeholder="Product Description">
+          </div>
+          <div class="form-group">
+            <input type="number" min="0.01" step="0.01" ng-model="productPrice" class="form-control" placeholder="Price">
+          </div>
+          <div class="form-group">
+            <input type="number" ng-model="productQuantity" class="form-control" placeholder="Quantity">
+          </div>
+          <button type="submit" class="btn btn-danger">Add</button>
+        </form>
     </div>
   </body>
 </html>
